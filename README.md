@@ -1,4 +1,4 @@
-# GhanaGuard 🛡️
+# MoneyGuard 🛡️
 ### An ML-Powered Fraud & AML Detection System for Ghana's Mobile Money Ecosystem
 
 ![Python](https://img.shields.io/badge/Python-3.11-blue)
@@ -22,7 +22,7 @@ The result is predictable:
 
 By the time a Suspicious Transaction Report reaches the Financial Intelligence Centre under **Act 749**, the money is gone.
 
-**GhanaGuard** replaces reactive, rules-only monitoring with a hybrid ML system that detects anomalies in real time, correlates signals across channels, and generates explainable alerts that compliance officers can act on — and regulators can audit.
+**MoneyGuard** replaces reactive, rules-only monitoring with a hybrid ML system that detects anomalies in real time, correlates signals across channels, and generates explainable alerts that compliance officers can act on — and regulators can audit.
 
 ---
 
@@ -215,11 +215,8 @@ streamlit run dashboard/app.py
 
 ## Author
 
-**[Your Name]**
-MSc IT for Business | Data Scientist | Business Strategist
+**Efua Ahmed**
 Specialising in secure, ethical fintech solutions.
-
-[LinkedIn](#) · [GitHub](#)
 
 ---
 
