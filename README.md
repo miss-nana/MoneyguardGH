@@ -1,4 +1,4 @@
-# GhanaGuard 🛡️
+# MoneyGuard 🛡️
 ### An ML-Powered Fraud & AML Detection System for Ghana's Mobile Money Ecosystem
 
 ![Python](https://img.shields.io/badge/Python-3.11-blue)
@@ -17,12 +17,14 @@ Account takeover, OTP phishing, and structured fund draining are exploiting a cr
 The result is predictable:
 
 - **Cross-channel attacks go undetected** — a compromised MoMo wallet becomes a launchpad into linked bank accounts, often days later, with no system-level correlation between the two events
-- **Structured draining evades velocity checks** — repeated small transfers and withdrawals are designed to look like normal behavior to rule engines
+- **Structured draining evades velocity checks** — repeated small transfers and withdrawals are designed to look like normal behaviour to rule engines
 - **Behavioral anomalies are invisible** — there is no baseline of *who the customer is*, so there is nothing to compare against when the attacker takes over
 
 By the time a Suspicious Transaction Report reaches the Financial Intelligence Centre under **Act 749**, the money is gone.
 
-**GhanaGuard** replaces reactive, rules-only monitoring with a hybrid ML system that detects anomalies in real time, correlates signals across channels, and generates explainable alerts that compliance officers can act on — and regulators can audit.
+**MoneyGuard** replaces reactive, rules-only monitoring with a hybrid ML system that detects anomalies in real time, correlates signals across channels, and generates explainable alerts that compliance officers can act on — and regulators can audit.
+
+Built for Ghana's regulatory reality: **BoG Act 987, Act 749/874, the Consumer Protection Directive 2022, and FATF Recommendation 16.**
 
 ---
 
@@ -30,13 +32,33 @@ By the time a Suspicious Transaction Report reaches the Financial Intelligence C
 
 | # | Objective | Why It Matters |
 |---|-----------|----------------|
-| 1 | Reduce **false negative rates** in fraud detection across MoMo and linked bank transactions | Every missed fraud event is real money lost and regulatory exposure |
+| 1 | Reduce **false negative rates** in fraud detection across MoMo and linked bank transactions | Every missed fraud event is real money lost and real regulatory exposure |
 | 2 | Reduce **false positive rates** to minimize alert fatigue among compliance analysts | Analysts who see too many false alarms stop trusting the system |
 | 3 | Detect **cross-channel attacks** by correlating MoMo and bank account signals in near real-time | The most damaging attacks exploit the monitoring gap between channels |
 | 4 | Generate **human-readable explanations** for every alert via SHAP | Compliance officers must make defensible decisions without needing to understand the model |
 | 5 | Demonstrate compliance with the **BoG Consumer Protection Directive 2022** through automated customer notification triggers | Customers have a right to be notified of suspicious activity on their accounts |
 | 6 | Reduce **mean time to flag (MTTF)** for structured draining attacks from days to minutes | Speed of detection directly determines how much can be recovered |
 | 7 | Provide a **risk-tiered alerting system** so analysts prioritize high-confidence flags first | Not all alerts are equal — analyst time should go to the highest-risk events |
+
+---
+
+## Design Principle: Inclusive Fraud Detection
+
+> **The BoG GHS 10,000 reporting threshold is a regulatory floor — not a fraud detection limit.**
+
+Ghana's AML framework requires financial institutions to file Suspicious Transaction Reports (STRs) for transactions exceeding GHS 10,000. This threshold exists to catch large-scale money laundering. It was never designed to protect everyday Ghanaians.
+
+Consider a farmer earning GHS 1,000 a month with GHS 300 remaining in her account. A fraudster draining GHS 280 in three rapid withdrawals will never trigger a GHS 10,000 rule engine. But it will wipe her out entirely.
+
+**MoneyGuard uses behavioural baselining instead of fixed thresholds.** Every customer has a personal anomaly threshold derived from their own transaction history and income profile. A GHS 400 withdrawal at 2am from a low-income account is treated with the same scrutiny as a GHS 25,000 withdrawal from a corporate account — because both represent the same level of deviation from that customer's normal behaviour.
+
+This approach:
+- Protects low-income users, farmers, traders, and market women who sit far below the GHS 10,000 floor
+- Aligns with **FATF's financial inclusion guidance**, which calls for proportionate, risk-based AML controls
+- Supports **BoG's financial inclusion mandate** under the National Financial Inclusion and Development Strategy
+- Does **not** conflict with Act 749 — it goes beyond it
+
+MoneyGuard models Ghana's socioeconomic reality directly in the data: **55% of simulated customers are low-income**, reflecting the demographics of Ghana's MoMo user base.
 
 ---
 
@@ -51,7 +73,8 @@ By the time a Suspicious Transaction Report reaches the Financial Intelligence C
                  ▼                        ▼
 ┌─────────────────────────────────────────────────────────────┐
 │                   FEATURE ENGINEERING                       │
-│   Velocity Features │ Behavioral Baseline │ Channel Flags   │
+│   Velocity Features │ Behavioural Baseline │ Channel Flags  │
+│         Income Tier │ Personal Threshold   │ Time Patterns  │
 └─────────────────────────────┬───────────────────────────────┘
                               │
                  ┌────────────┴────────────┐
@@ -96,14 +119,14 @@ By the time a Suspicious Transaction Report reaches the Financial Intelligence C
 |---------|-------------|-------------------|
 | **OTP Phishing** | Attacker socially engineers victim into sharing MoMo authorization code | Fake Google Maps restaurant listing |
 | **Account Takeover (ATO)** | Attacker uses shared credentials to access linked bank accounts | Same PIN across MoMo and bank |
-| **Structured Draining** | Repeated below-threshold transfers to evade velocity checks | Multiple GHS 500 withdrawals instead of one GHS 5,000 |
-| **Cross-Channel Lateral Movement** | MoMo compromise used as entry point to bank account days later | 48-hour delay between MoMo and bank attack |
+| **Structured Draining** | Repeated below-personal-threshold transfers to evade velocity checks | Multiple withdrawals just under customer's behavioural limit |
+| **Cross-Channel Lateral Movement** | MoMo compromise used as entry point to bank account days later | 24–72 hour delay between MoMo and bank attack |
 
 ---
 
 ## Regulatory Mapping
 
-| Regulation | Jurisdiction | Relevance to GhanaGuard |
+| Regulation | Jurisdiction | Relevance to MoneyGuard |
 |------------|-------------|--------------------------|
 | **Anti-Money Laundering Act, 2008 (Act 749)** | Ghana | STR filing obligations; defines suspicious transaction criteria |
 | **AML (Amendment) Act, 2014 (Act 874)** | Ghana | Extends obligations to mobile money operators |
@@ -111,6 +134,7 @@ By the time a Suspicious Transaction Report reaches the Financial Intelligence C
 | **BoG Consumer Protection Directive, 2022** | Ghana | Customer notification obligations for suspicious account activity |
 | **Data Protection Act, 2012 (Act 843)** | Ghana | Governs use of customer data in ML model training and inference |
 | **FATF Recommendation 16** | International | Wire transfer rules; applies to MoMo cross-border transactions |
+| **FATF Financial Inclusion Guidance** | International | Supports proportionate, risk-based controls that protect all income levels |
 | **GIABA Mutual Evaluation Framework** | West Africa | Regional AML/CFT compliance context for Ghana |
 
 ---
@@ -126,14 +150,14 @@ By the time a Suspicious Transaction Report reaches the Financial Intelligence C
 | Explainability | SHAP |
 | Dashboard | Streamlit |
 | Visualization | Plotly, Seaborn |
-| Environment | Docker |
+| Environment | Docker (planned) |
 
 ---
 
 ## Project Structure
 
 ```
-ghanaGuard/
+MoneyGuard/
 │
 ├── data/
 │   ├── raw/              # Not committed — placeholder for real data
@@ -141,7 +165,7 @@ ghanaGuard/
 │   └── synthetic/        # Generated MoMo + bank transaction data
 │
 ├── notebooks/
-│   ├── 01_eda.ipynb              # Exploratory data analysis
+│   ├── 01_eda.ipynb
 │   ├── 02_feature_engineering.ipynb
 │   ├── 03_anomaly_detection.ipynb
 │   ├── 04_supervised_model.ipynb
@@ -170,12 +194,13 @@ ghanaGuard/
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/ghanaGuard.git
-cd ghanaGuard
+git clone https://github.com/miss-nana/MoneyguardGH.git
+cd MoneyguardGH
 
 # Create virtual environment
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+source venv/Scripts/activate  # Windows
+# source venv/bin/activate    # Mac/Linux
 
 # Install dependencies
 pip install -r requirements.txt
@@ -193,13 +218,14 @@ streamlit run dashboard/app.py
 
 > Results will be populated as each module is completed.
 
-| Metric | Baseline (Rules-Only) | GhanaGuard (ML Hybrid) |
+| Metric | Baseline (Rules-Only) | MoneyGuard (ML Hybrid) |
 |--------|----------------------|------------------------|
 | False Negative Rate | TBD | TBD |
 | False Positive Rate | TBD | TBD |
 | Mean Time to Flag | Days | TBD |
 | Cross-Channel Detection | ❌ | ✅ |
 | Explainable Alerts | ❌ | ✅ |
+| Low-Income User Protection | ❌ | ✅ |
 
 ---
 
@@ -210,6 +236,7 @@ streamlit run dashboard/app.py
 - **Automated customer notification** pipeline (BoG CPD 2022 full compliance)
 - **Model retraining pipeline** with drift detection
 - **Network graph analysis** for mule account detection
+- **SMS alert integration** with MTN, Vodafone Cash, and AirtelTigo Money APIs
 
 ---
 
@@ -217,9 +244,9 @@ streamlit run dashboard/app.py
 
 **[Your Name]**
 MSc IT for Business | Data Scientist | Business Strategist
-Specialising in secure, ethical fintech solutions.
+Specialising in secure, ethical, and inclusive fintech solutions.
 
-[LinkedIn](#) · [GitHub](#)
+[LinkedIn](#) · [GitHub](https://github.com/miss-nana/MoneyguardGH)
 
 ---
 
