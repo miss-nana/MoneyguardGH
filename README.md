@@ -58,9 +58,6 @@ This approach:
 - Aligns with **FATF's financial inclusion guidance**, which calls for proportionate, risk-based AML controls
 - Supports **BoG's financial inclusion mandate** under the National Financial Inclusion and Development Strategy
 - Does **not** conflict with Act 749 — it goes beyond it
-
-MoneyGuard models Ghana's socioeconomic reality directly in the data: **55% of simulated customers are low-income**, reflecting the demographics of Ghana's MoMo user base.
-
 ---
 
 ## System Architecture
