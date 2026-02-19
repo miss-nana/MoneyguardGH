@@ -10,21 +10,22 @@
 
 ## The Problem
 
-**Ghana's mobile money ecosystem processes over 1 billion transactions annually. Fraudsters are winning.**
+**Ghana's mobile money ecosystem processed GHS 1.07 trillion in transactions in 2023. Fraudsters are taking an increasing share.**
 
-Account takeover, OTP phishing, and structured fund draining are exploiting a critical gap: most fraud and AML detection systems in Ghanaian fintechs still run on static, rule-based engines with fixed thresholds. Sophisticated attackers know these thresholds. They stay below them.
-
+The Bank of Ghana reported 13,451 fraud cases across the financial sector in 2023. Mobile money fraud accounted for approximately 20% of those cases, with total sector losses reaching GHS 56 million — up from GHS 33 million in 2021. More than GHS 10 million of those losses came directly from mobile money fraud.
+Yet the systems meant to catch it are failing. Most fraud and AML detection in Ghanaian fintechs still runs on static, rule-based engines with fixed thresholds. Sophisticated attackers know these thresholds. They stay below them.
 The result is predictable:
 
-- **Cross-channel attacks go undetected** — a compromised MoMo wallet becomes a launchpad into linked bank accounts, often days later, with no system-level correlation between the two events
-- **Structured draining evades velocity checks** — repeated small transfers and withdrawals are designed to look like normal behaviour to rule engines
-- **Behavioral anomalies are invisible** — there is no baseline of *who the customer is*, so there is nothing to compare against when the attacker takes over
+Cross-channel attacks go undetected — a compromised MoMo wallet becomes a launchpad into linked bank accounts, often days later, with no system-level correlation between the two events
+Structured draining evades velocity checks — repeated small transfers and withdrawals are designed to look like normal behaviour to rule engines
+Behavioral anomalies are invisible — there is no baseline of who the customer is, so there is nothing to compare against when the attacker takes over
+Low-income users are most exposed — the GHS 10,000 reporting threshold offers no protection to the majority of MoMo users whose entire account balance sits below it
 
-By the time a Suspicious Transaction Report reaches the Financial Intelligence Centre under **Act 749**, the money is gone.
-
+By the time a Suspicious Transaction Report reaches the Financial Intelligence Centre under Act 749, the money is gone.
 **MoneyGuard** replaces reactive, rules-only monitoring with a hybrid ML system that detects anomalies in real time, correlates signals across channels, and generates explainable alerts that compliance officers can act on — and regulators can audit.
+Built for Ghana's regulatory reality: BoG Act 987, Act 749/874, the Consumer Protection Directive 2022, and FATF Recommendation 16.
 
-Built for Ghana's regulatory reality: **BoG Act 987, Act 749/874, the Consumer Protection Directive 2022, and FATF Recommendation 16.**
+**Source: Bank of Ghana Annual Report 2023; MyJoyOnline — Mobile Payment Fraud in Ghana: A Growing Cybersecurity Challenge (August 2025)**
 
 ---
 

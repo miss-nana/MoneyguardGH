@@ -41,9 +41,9 @@ fake = Faker('en_GB')
 Faker.seed(SEED)
 
 NUM_CUSTOMERS  = 500
-NUM_MOMO_LEGIT = 8000
-NUM_BANK_LEGIT = 4000
-NUM_ATTACKS    = 120
+NUM_MOMO_LEGIT = 7000    # was 8000
+NUM_BANK_LEGIT = 3500    # was 4000
+NUM_ATTACKS    = 200     # was 120
 OUTPUT_DIR     = "data/synthetic"
 
 # BoG regulatory reporting floor — used for structured drain detection only
